@@ -134,11 +134,13 @@ The frontend is built using clean, vanilla **HTML5**, **CSS3**, and **Vanilla Ja
 
 ## 📸 Screenshots Placeholders
 
-### 1. Main Dashboard View
-*(Place your screenshot of the initial dashboard state here)*
+### 1. Splash Screen
+<img width="1918" height="968" alt="SPLASH_T1" src="https://github.com/user-attachments/assets/195746c2-77b7-4af1-9394-e6a35551655f" />
 
-### 2. Positive Sentiment Prediction
-*(Place your screenshot showing a positive result with green progress bar here)*
+
+### 2. Home Screen
+<img width="1898" height="972" alt="HOME" src="https://github.com/user-attachments/assets/03e9d5f5-b6d5-488f-8f85-767877abdfb5" />
+
 
 ### 3. Error Handling Notification
 *(Place your screenshot showing connection error or validation message here)*
