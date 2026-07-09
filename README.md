@@ -4,6 +4,12 @@ AuraSentiment is a premium, portfolio-grade Machine Learning based Sentiment Ana
 
 The project is developed as part of the **DEVFORGE AI/ML Internship**.
 
+### 🌐 Live Deployments
+- **Live Frontend (Vercel):** [https://sentiment-analysis-web-app-gcgl.vercel.app/](https://sentiment-analysis-web-app-gcgl.vercel.app/)
+- **Live Backend API (Render):** [https://sentiment-analysis-web-app-7odn.onrender.com/](https://sentiment-analysis-web-app-7odn.onrender.com/)
+- **API Documentation (Swagger UI):** [https://sentiment-analysis-web-app-7odn.onrender.com/docs](https://sentiment-analysis-web-app-7odn.onrender.com/docs)
+- **API Documentation (ReDoc):** [https://sentiment-analysis-web-app-7odn.onrender.com/redoc](https://sentiment-analysis-web-app-7odn.onrender.com/redoc)
+
 ---
 
 ## 🚀 Key Features
@@ -36,6 +42,8 @@ The project is developed as part of the **DEVFORGE AI/ML Internship**.
 │   ├── style.css                # Premium responsive glassmorphic stylesheet
 │   └── app.js                   # Client-side integration logic (Fetch API)
 ├── requirements.txt             # Unified Python dependencies
+├── render.yaml                  # Render deployment configuration
+├── vercel.json                  # Vercel deployment configuration
 └── README.md                    # Project documentation
 ```
 
@@ -71,8 +79,8 @@ The project is developed as part of the **DEVFORGE AI/ML Internship**.
 ## 🌐 API Documentation
 
 FastAPI provides automatic interactive API documentations. You can view them at:
-- **Swagger UI:** `http://127.0.0.1:8000/docs` (Interactive API explorer)
-- **ReDoc:** `http://127.0.0.1:8000/redoc` (Clean, schema-focused documentation)
+- **Swagger UI:** `http://127.0.0.1:8000/docs` (or live at [https://sentiment-analysis-web-app-7odn.onrender.com/docs](https://sentiment-analysis-web-app-7odn.onrender.com/docs))
+- **ReDoc:** `http://127.0.0.1:8000/redoc` (or live at [https://sentiment-analysis-web-app-7odn.onrender.com/redoc](https://sentiment-analysis-web-app-7odn.onrender.com/redoc))
 
 ### Endpoints
 
@@ -120,7 +128,7 @@ The frontend is built using clean, vanilla **HTML5**, **CSS3**, and **Vanilla Ja
      Then navigate to: `http://localhost:8080`
 
 2. **Integration details:**
-   The frontend uses the browser's native **Fetch API** to send requests asynchronously to `http://127.0.0.1:8000/predict`. It handles loading states, error fallback displays, and dynamically applies positive (green), neutral (orange), and negative (red) UI styles based on the predicted category.
+   The frontend uses the browser's native **Fetch API** to send requests asynchronously to the live backend hosted on Render: `https://sentiment-analysis-web-app-7odn.onrender.com/predict`. It handles loading states, error fallback displays, and dynamically applies positive (green), neutral (orange), and negative (red) UI styles based on the predicted category.
 
 ---
 
@@ -141,4 +149,3 @@ The frontend is built using clean, vanilla **HTML5**, **CSS3**, and **Vanilla Ja
 1. **Transformer Models:** Upgrade from Logistic Regression to a pre-trained Transformer (like DistilBERT) for superior semantic parsing.
 2. **Emoji Mapping:** Parse and tokenize emojis to preserve their sentiment scores instead of discarding them.
 3. **Database Integration:** Save history of user query predictions for analytics and active learning feedback loops.
-=======
