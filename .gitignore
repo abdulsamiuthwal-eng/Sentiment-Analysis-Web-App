@@ -1,0 +1,38 @@
+# Python virtual environment
+.venv/
+venv/
+env/
+*.egg-info/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Distribution / packaging
+dist/
+build/
+
+# Sensitive environment files
+.env
+*.env
+*.env.*
+
+# Log files
+*.log
+
+# Large dataset files - exclude from repository
+dataset/*.csv

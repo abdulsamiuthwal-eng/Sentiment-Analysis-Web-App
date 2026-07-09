@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraSentiment — Real-Time Sentiment Classifier</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Premium background blobs -->
+    <div class="background-decorations">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="brand">
+                <i class="fa-solid fa-microchip brand-icon"></i>
+                <span class="brand-name">AuraSentiment</span>
+            </div>
+            <h1 class="main-title">Decode Emotions with AI</h1>
+            <p class="subtitle">Enter any tweet or sentence below. Our trained Logistic Regression classifier will analyze the text sentiment with real-time confidence scores.</p>
+        </header>
+
+        <!-- Main Prediction Card -->
+        <section class="card glassmorphic">
+            <div class="input-section">
+                <label for="text-input" class="input-label">Enter Text for Analysis</label>
+                <div class="textarea-wrapper">
+                    <textarea 
+                        id="text-input" 
+                        placeholder="Type your text here... (e.g., 'The support team was incredibly helpful and fast!')" 
+                        maxlength="500"
+                    ></textarea>
+                    <div class="char-counter"><span id="char-count">0</span> / 500</div>
+                </div>
+                
+                <button id="predict-btn" class="btn-primary">
+                    <span id="btn-text">Classify Sentiment</span>
+                    <i class="fa-solid fa-paper-plane btn-icon" id="btn-icon"></i>
+                    <div class="spinner hidden" id="btn-spinner"></div>
+                </button>
+            </div>
+
+            <!-- Error Notification Area -->
+            <div id="error-message" class="error-container hidden">
+                <i class="fa-solid fa-circle-exclamation error-icon"></i>
+                <span id="error-text">Something went wrong. Please check your connection.</span>
+            </div>
+
+            <!-- Prediction Result Card -->
+            <div id="result-card" class="result-card hidden">
+                <div class="result-header">
+                    <span class="result-title">Result Analysis</span>
+                    <div class="sentiment-badge" id="sentiment-badge">
+                        <i id="sentiment-icon" class="fa-solid"></i>
+                        <span id="sentiment-label">Positive</span>
+                    </div>
+                </div>
+                
+                <div class="result-body">
+                    <p class="analyzed-text-preview" id="text-preview"></p>
+                    <div class="metric-container" id="confidence-container">
+                        <div class="metric-header">
+                            <span class="metric-label">Model Confidence</span>
+                            <span class="metric-value" id="confidence-value">0.00%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="confidence-bar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2026 DEVFORGE AI/ML Internship. Developed by <strong>Abdul Sami</strong>.</p>
+        </footer>
+    </main>
+
+    <!-- JS script -->
+    <script src="app.js"></script>
+</body>
+</html>

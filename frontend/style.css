@@ -1,0 +1,523 @@
+/* ==========================================================================
+   AuraSentiment Premium Glassmorphic Theme stylesheet
+   ========================================================================== */
+
+/* Design Tokens & Theme Variables */
+:root {
+    --font-primary: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-display: 'Outfit', sans-serif;
+    
+    /* HSL Tailored Color Palette */
+    --bg-dark: hsl(222, 47%, 7%);
+    --card-bg: hsla(223, 47%, 12%, 0.55);
+    --card-border: hsla(223, 100%, 80%, 0.08);
+    --card-glow: hsla(224, 85%, 60%, 0.15);
+    
+    --text-primary: hsl(210, 40%, 98%);
+    --text-muted: hsl(215, 20%, 65%);
+    --text-inv: hsl(222, 47%, 7%);
+
+    /* Primary Accent Gradients */
+    --accent-grad: linear-gradient(135deg, hsl(244, 97%, 66%) 0%, hsl(262, 83%, 58%) 100%);
+    --accent-grad-hover: linear-gradient(135deg, hsl(244, 97%, 72%) 0%, hsl(262, 83%, 64%) 100%);
+    --border-grad: linear-gradient(135deg, hsla(244, 97%, 66%, 0.4) 0%, hsla(262, 83%, 58%, 0.1) 100%);
+
+    /* Sentiment Colors */
+    --color-pos: hsl(142, 70%, 45%);
+    --color-pos-bg: hsla(142, 70%, 45%, 0.15);
+    --color-pos-border: hsla(142, 70%, 45%, 0.3);
+
+    --color-neu: hsl(35, 92%, 52%);
+    --color-neu-bg: hsla(35, 92%, 52%, 0.15);
+    --color-neu-border: hsla(35, 92%, 52%, 0.3);
+
+    --color-neg: hsl(350, 89%, 60%);
+    --color-neg-bg: hsla(350, 89%, 60%, 0.15);
+    --color-neg-border: hsla(350, 89%, 60%, 0.3);
+
+    --color-err: hsl(350, 89%, 60%);
+    --color-err-bg: hsla(350, 89%, 60%, 0.1);
+    
+    /* Spacing & Borders */
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+    
+    --shadow-premium: 0 20px 40px -15px hsla(222, 47%, 2%, 0.6),
+                      0 0 50px -10px hsla(224, 85%, 60%, 0.08);
+    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset and Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Dynamic Shifting Gradient Blobs */
+.background-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    animation: floatBlobs 20s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+    top: -10%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: hsl(244, 97%, 66%);
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: hsl(262, 83%, 58%);
+    animation-delay: 5s;
+}
+
+.blob-3 {
+    top: 40%;
+    left: 70%;
+    width: 400px;
+    height: 400px;
+    background: hsl(324, 91%, 55%);
+    animation-delay: 10s;
+    opacity: 0.15;
+}
+
+@keyframes floatBlobs {
+    0% {
+        transform: translate(0px, 0px) scale(1);
+    }
+    50% {
+        transform: translate(40px, -60px) scale(1.1);
+    }
+    100% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+}
+
+/* Core Container Layout */
+.container {
+    width: 100%;
+    max-width: 680px;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    z-index: 1;
+}
+
+/* Typography & Header styling */
+.app-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: hsla(223, 100%, 80%, 0.05);
+    border: 1px solid hsla(223, 100%, 80%, 0.1);
+    border-radius: 100px;
+    margin-bottom: 8px;
+}
+
+.brand-icon {
+    font-size: 1.1rem;
+    background: var(--accent-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    color: var(--text-primary);
+}
+
+.main-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.5rem;
+    line-height: 1.15;
+    background: linear-gradient(180deg, #FFFFFF 0%, #D8E3FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 580px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Premium Glassmorphic Card */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow-premium);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+
+.card:hover {
+    border-color: hsla(223, 100%, 80%, 0.12);
+    box-shadow: 0 30px 60px -20px hsla(222, 47%, 2%, 0.7),
+                0 0 60px -5px hsla(224, 85%, 60%, 0.1);
+}
+
+/* Text Area Form Styling */
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.input-label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.textarea-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+    min-height: 140px;
+    background: hsla(222, 47%, 4%, 0.4);
+    border: 1px solid hsla(223, 100%, 80%, 0.12);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    padding: 16px;
+    font-family: var(--font-primary);
+    font-size: 1.05rem;
+    resize: vertical;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+
+textarea:focus {
+    border-color: hsl(244, 97%, 66%);
+    background: hsla(222, 47%, 4%, 0.6);
+    box-shadow: 0 0 20px -2px hsla(244, 97%, 66%, 0.25);
+}
+
+textarea::placeholder {
+    color: hsla(215, 20%, 65%, 0.45);
+}
+
+.char-counter {
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    font-size: 0.8rem;
+    color: hsla(215, 20%, 65%, 0.5);
+    pointer-events: none;
+}
+
+/* Button & Loading Styles */
+.btn-primary {
+    background: var(--accent-grad);
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 16px 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 20px -5px hsla(244, 97%, 66%, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    background: var(--accent-grad-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px -5px hsla(244, 97%, 66%, 0.5);
+}
+
+.btn-primary:active {
+    transform: translateY(0px);
+}
+
+.btn-primary:disabled {
+    background: hsla(223, 100%, 80%, 0.05);
+    border: 1px solid hsla(223, 100%, 80%, 0.08);
+    color: hsla(210, 40%, 98%, 0.35);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-icon {
+    font-size: 0.95rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-primary:hover:not(:disabled) .btn-icon {
+    transform: translateX(4px);
+}
+
+/* Loading Spinner */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--text-primary);
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error Notification */
+.error-container {
+    background: var(--color-err-bg);
+    border: 1px solid var(--color-neg-border);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-neg);
+    font-size: 0.95rem;
+    font-weight: 500;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.error-icon {
+    font-size: 1.15rem;
+}
+
+/* Results Display Elements */
+.result-card {
+    background: hsla(222, 47%, 4%, 0.3);
+    border: 1px solid hsla(223, 100%, 80%, 0.05);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid hsla(223, 100%, 80%, 0.06);
+    padding-bottom: 16px;
+}
+
+.result-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+/* Sentiment Badges */
+.sentiment-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+    transition: var(--transition-smooth);
+}
+
+/* Dynamic Classes applied by JS */
+.sentiment-badge.positive {
+    background-color: var(--color-pos-bg);
+    border: 1px solid var(--color-pos-border);
+    color: var(--color-pos);
+}
+
+.sentiment-badge.neutral {
+    background-color: var(--color-neu-bg);
+    border: 1px solid var(--color-neu-border);
+    color: var(--color-neu);
+}
+
+.sentiment-badge.negative {
+    background-color: var(--color-neg-bg);
+    border: 1px solid var(--color-neg-border);
+    color: var(--color-neg);
+}
+
+.analyzed-text-preview {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    font-style: italic;
+    word-break: break-word;
+    border-left: 3px solid hsla(223, 100%, 80%, 0.15);
+    padding-left: 16px;
+    margin-bottom: 8px;
+}
+
+/* Metrics and Progress Bar */
+.metric-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.metric-label {
+    color: var(--text-muted);
+}
+
+.metric-value {
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-weight: 700;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background: hsla(222, 47%, 4%, 0.5);
+    border-radius: 100px;
+    overflow: hidden;
+    border: 1px solid hsla(223, 100%, 80%, 0.04);
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Color schemes for progress bar based on sentiment */
+.progress-bar.positive {
+    background: linear-gradient(90deg, hsl(142, 70%, 40%) 0%, var(--color-pos) 100%);
+    box-shadow: 0 0 10px hsla(142, 70%, 45%, 0.3);
+}
+
+.progress-bar.neutral {
+    background: linear-gradient(90deg, hsl(35, 92%, 45%) 0%, var(--color-neu) 100%);
+    box-shadow: 0 0 10px hsla(35, 92%, 52%, 0.3);
+}
+
+.progress-bar.negative {
+    background: linear-gradient(90deg, hsl(350, 89%, 55%) 0%, var(--color-neg) 100%);
+    box-shadow: 0 0 10px hsla(350, 89%, 60%, 0.3);
+}
+
+/* Helper Utilities */
+.hidden {
+    display: none !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Footer Styling */
+.app-footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.app-footer strong {
+    color: hsl(223, 100%, 80%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 580px) {
+    .container {
+        padding: 24px 16px;
+    }
+    
+    .main-title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .card {
+        padding: 24px 20px;
+    }
+}
