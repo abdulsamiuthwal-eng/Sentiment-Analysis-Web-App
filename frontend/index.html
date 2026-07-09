@@ -1,95 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AuraSentiment — Real-Time Sentiment Classifier</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AuraSentiment — AI Powered Sentiment Analysis</title>
+  <meta name="description" content="AuraSentiment: Analyze the emotion behind any text using Machine Learning. Built with FastAPI, TF-IDF, and Logistic Regression." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Premium background blobs -->
-    <div class="background-decorations">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
+
+  <!-- ═══════════════════════════════════════════
+       SPLASH SCREEN
+  ═══════════════════════════════════════════ -->
+  <div id="splash-screen">
+    <canvas id="particle-canvas"></canvas>
+    <div class="splash-content">
+      <div class="splash-logo">
+        <div class="logo-ring ring-outer"></div>
+        <div class="logo-ring ring-mid"></div>
+        <div class="logo-ring ring-inner"></div>
+        <div class="logo-core">
+          <i class="fa-solid fa-brain"></i>
+        </div>
+      </div>
+      <h1 class="splash-title">AuraSentiment</h1>
+      <p class="splash-subtitle">AI Powered Sentiment Analysis</p>
+      <div class="splash-loader">
+        <div class="loader-track">
+          <div class="loader-fill" id="loader-fill"></div>
+        </div>
+        <span class="loader-label" id="loader-label">Initializing AI Engine...</span>
+      </div>
     </div>
+  </div>
 
-    <main class="container">
-        <!-- Header -->
-        <header class="app-header">
-            <div class="brand">
-                <i class="fa-solid fa-microchip brand-icon"></i>
-                <span class="brand-name">AuraSentiment</span>
+  <!-- ═══════════════════════════════════════════
+       TOAST NOTIFICATION
+  ═══════════════════════════════════════════ -->
+  <div id="toast" class="toast hidden">
+    <i class="fa-solid fa-circle-exclamation toast-icon"></i>
+    <span id="toast-text">Please enter text before analyzing.</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN APP
+  ═══════════════════════════════════════════ -->
+  <div id="main-app" class="hidden">
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <div class="nav-logo"><i class="fa-solid fa-brain"></i></div>
+          <span class="nav-name">AuraSentiment</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How it Works</a></li>
+          <li><a href="#analyzer">Analyzer</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+        <a href="#analyzer" class="nav-cta">Try Now <i class="fa-solid fa-arrow-right"></i></a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobile-menu">
+        <a href="#features" class="mobile-link">Features</a>
+        <a href="#how-it-works" class="mobile-link">How it Works</a>
+        <a href="#analyzer" class="mobile-link">Analyzer</a>
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#analyzer" class="mobile-link mobile-cta">Try Now</a>
+      </div>
+    </nav>
+
+    <!-- ═══════ HERO SECTION ═══════ -->
+    <section class="hero" id="home">
+      <div class="hero-blobs">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+        <div class="blob b3"></div>
+      </div>
+      <div class="hero-grid-overlay"></div>
+      <div class="hero-container">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>Powered by Machine Learning</span>
+        </div>
+        <h1 class="hero-title">
+          Understand the <span class="title-gradient">Emotion</span><br />
+          Behind Every Word
+        </h1>
+        <p class="hero-sub">
+          Analyze reviews, tweets, comments and messages using Machine Learning.<br />
+          Real-time sentiment classification with confidence scoring.
+        </p>
+        <div class="hero-actions">
+          <a href="#analyzer" class="btn-hero-primary">
+            <span>Get Started</span>
+            <i class="fa-solid fa-rocket"></i>
+          </a>
+          <a href="#how-it-works" class="btn-hero-secondary">
+            <i class="fa-solid fa-play-circle"></i>
+            <span>Learn More</span>
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num">82%</span>
+            <span class="stat-lbl">Accuracy</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num">61K+</span>
+            <span class="stat-lbl">Trained Samples</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num">3</span>
+            <span class="stat-lbl">Sentiment Classes</span>
+          </div>
+        </div>
+      </div>
+      <!-- Floating preview cards -->
+      <div class="hero-float-cards">
+        <div class="float-card fc-pos">
+          <i class="fa-solid fa-face-smile"></i>
+          <div>
+            <div class="fc-label">Positive</div>
+            <div class="fc-val">98.2% confidence</div>
+          </div>
+        </div>
+        <div class="float-card fc-neg">
+          <i class="fa-solid fa-face-frown"></i>
+          <div>
+            <div class="fc-label">Negative</div>
+            <div class="fc-val">91.5% confidence</div>
+          </div>
+        </div>
+        <div class="float-card fc-neu">
+          <i class="fa-solid fa-face-meh"></i>
+          <div>
+            <div class="fc-label">Neutral</div>
+            <div class="fc-val">76.8% confidence</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ FEATURES SECTION ═══════ -->
+    <section class="features" id="features">
+      <div class="section-container">
+        <div class="section-tag">Capabilities</div>
+        <h2 class="section-title">Built with Production-Grade Technology</h2>
+        <p class="section-sub">Every component is chosen for performance, accuracy, and scalability.</p>
+        <div class="features-grid">
+
+          <div class="feature-card reveal">
+            <div class="feat-icon-wrap feat-blue">
+              <i class="fa-solid fa-database"></i>
             </div>
-            <h1 class="main-title">Decode Emotions with AI</h1>
-            <p class="subtitle">Enter any tweet or sentence below. Our trained Logistic Regression classifier will analyze the text sentiment with real-time confidence scores.</p>
-        </header>
+            <h3>Machine Learning</h3>
+            <p>Trained on 61K+ real-world Twitter samples across Positive, Neutral, and Negative classes.</p>
+          </div>
 
-        <!-- Main Prediction Card -->
-        <section class="card glassmorphic">
-            <div class="input-section">
-                <label for="text-input" class="input-label">Enter Text for Analysis</label>
-                <div class="textarea-wrapper">
-                    <textarea 
-                        id="text-input" 
-                        placeholder="Type your text here... (e.g., 'The support team was incredibly helpful and fast!')" 
-                        maxlength="500"
-                    ></textarea>
-                    <div class="char-counter"><span id="char-count">0</span> / 500</div>
-                </div>
-                
-                <button id="predict-btn" class="btn-primary">
-                    <span id="btn-text">Classify Sentiment</span>
-                    <i class="fa-solid fa-paper-plane btn-icon" id="btn-icon"></i>
-                    <div class="spinner hidden" id="btn-spinner"></div>
-                </button>
+          <div class="feature-card reveal">
+            <div class="feat-icon-wrap feat-purple">
+              <i class="fa-brands fa-python"></i>
             </div>
+            <h3>FastAPI Backend</h3>
+            <p>High-performance REST API with auto-generated Swagger UI documentation, CORS handling, and Pydantic validation.</p>
+          </div>
 
-            <!-- Error Notification Area -->
-            <div id="error-message" class="error-container hidden">
-                <i class="fa-solid fa-circle-exclamation error-icon"></i>
-                <span id="error-text">Something went wrong. Please check your connection.</span>
+          <div class="feature-card reveal">
+            <div class="feat-icon-wrap feat-cyan">
+              <i class="fa-solid fa-code-branch"></i>
             </div>
+            <h3>TF-IDF Vectorization</h3>
+            <p>Unigrams and bigrams with top 5000 vocabulary terms intelligently extracted to represent text numerically.</p>
+          </div>
 
-            <!-- Prediction Result Card -->
-            <div id="result-card" class="result-card hidden">
-                <div class="result-header">
-                    <span class="result-title">Result Analysis</span>
-                    <div class="sentiment-badge" id="sentiment-badge">
-                        <i id="sentiment-icon" class="fa-solid"></i>
-                        <span id="sentiment-label">Positive</span>
-                    </div>
-                </div>
-                
-                <div class="result-body">
-                    <p class="analyzed-text-preview" id="text-preview"></p>
-                    <div class="metric-container" id="confidence-container">
-                        <div class="metric-header">
-                            <span class="metric-label">Model Confidence</span>
-                            <span class="metric-value" id="confidence-value">0.00%</span>
-                        </div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" id="confidence-bar" style="width: 0%;"></div>
-                        </div>
-                    </div>
-                </div>
+          <div class="feature-card reveal">
+            <div class="feat-icon-wrap feat-green">
+              <i class="fa-solid fa-chart-line"></i>
             </div>
-        </section>
+            <h3>Logistic Regression</h3>
+            <p>The best-performing model with 82.35% validation accuracy, outperforming Naive Bayes and Random Forest.</p>
+          </div>
 
-        <!-- Footer -->
-        <footer class="app-footer">
-            <p>&copy; 2026 DEVFORGE AI/ML Internship. Developed by <strong>Abdul Sami</strong>.</p>
-        </footer>
-    </main>
+          <div class="feature-card reveal">
+            <div class="feat-icon-wrap feat-orange">
+              <i class="fa-solid fa-mobile-screen"></i>
+            </div>
+            <h3>Responsive Design</h3>
+            <p>Fully responsive glassmorphic UI that works beautifully on desktops, tablets, and mobile devices.</p>
+          </div>
 
-    <!-- JS script -->
-    <script src="app.js"></script>
+          <div class="feature-card reveal">
+            <div class="feat-icon-wrap feat-pink">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h3>Real-time Prediction</h3>
+            <p>Instant sentiment classification with probability-based confidence scores, returned in milliseconds.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ HOW IT WORKS ═══════ -->
+    <section class="how-it-works" id="how-it-works">
+      <div class="section-container">
+        <div class="section-tag">Pipeline</div>
+        <h2 class="section-title">How AuraSentiment Works</h2>
+        <p class="section-sub">A clean, end-to-end NLP pipeline from raw text to sentiment prediction.</p>
+        <div class="timeline">
+
+          <div class="timeline-item reveal">
+            <div class="tl-icon-wrap tl-blue">
+              <i class="fa-solid fa-table"></i>
+            </div>
+            <div class="tl-content">
+              <span class="tl-step">Step 01</span>
+              <h3>Twitter Dataset</h3>
+              <p>61,000+ labeled tweets in Positive, Neutral, and Negative categories loaded from CSV files.</p>
+            </div>
+          </div>
+
+          <div class="tl-connector reveal"></div>
+
+          <div class="timeline-item reveal">
+            <div class="tl-icon-wrap tl-purple">
+              <i class="fa-solid fa-broom"></i>
+            </div>
+            <div class="tl-content">
+              <span class="tl-step">Step 02</span>
+              <h3>Text Preprocessing</h3>
+              <p>URLs, punctuation, numbers, and special characters removed. WordNet Lemmatization applied.</p>
+            </div>
+          </div>
+
+          <div class="tl-connector reveal"></div>
+
+          <div class="timeline-item reveal">
+            <div class="tl-icon-wrap tl-cyan">
+              <i class="fa-solid fa-diagram-project"></i>
+            </div>
+            <div class="tl-content">
+              <span class="tl-step">Step 03</span>
+              <h3>TF-IDF Vectorization</h3>
+              <p>Text transformed into numerical feature vectors using Term Frequency-Inverse Document Frequency.</p>
+            </div>
+          </div>
+
+          <div class="tl-connector reveal"></div>
+
+          <div class="timeline-item reveal">
+            <div class="tl-icon-wrap tl-green">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <div class="tl-content">
+              <span class="tl-step">Step 04</span>
+              <h3>Machine Learning</h3>
+              <p>Logistic Regression classifier trained and evaluated against Naive Bayes and Random Forest.</p>
+            </div>
+          </div>
+
+          <div class="tl-connector reveal"></div>
+
+          <div class="timeline-item reveal">
+            <div class="tl-icon-wrap tl-orange">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="tl-content">
+              <span class="tl-step">Step 05</span>
+              <h3>Prediction + Confidence</h3>
+              <p>FastAPI returns the predicted sentiment with a probability-based confidence score in real time.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ MAIN ANALYZER ═══════ -->
+    <section class="analyzer-section" id="analyzer">
+      <div class="analyzer-blobs">
+        <div class="ab1"></div>
+        <div class="ab2"></div>
+      </div>
+      <div class="section-container">
+        <div class="section-tag">Live Demo</div>
+        <h2 class="section-title">Sentiment Analyzer</h2>
+        <p class="section-sub">Type or paste any text below and discover its emotional tone instantly.</p>
+
+        <div class="analyzer-card">
+          <div class="analyzer-top">
+            <label class="analyzer-label" for="text-input">
+              <i class="fa-solid fa-pen-to-square"></i>
+              Enter your text
+            </label>
+            <span class="char-badge"><span id="char-count">0</span> / 500</span>
+          </div>
+          <textarea
+            id="text-input"
+            placeholder="e.g. 'The support team was incredibly fast and helpful!'"
+            maxlength="500"
+          ></textarea>
+          <button id="predict-btn" class="analyze-btn">
+            <span id="btn-text">Analyze Sentiment</span>
+            <i class="fa-solid fa-magnifying-glass-chart btn-icon" id="btn-icon"></i>
+            <div class="spinner hidden" id="btn-spinner"></div>
+          </button>
+        </div>
+
+        <!-- Result Card -->
+        <div id="result-card" class="result-card hidden">
+          <div class="result-glow" id="result-glow"></div>
+          <div class="result-top">
+            <div class="result-emoji" id="result-emoji">😊</div>
+            <div class="result-meta">
+              <div class="sentiment-badge" id="sentiment-badge">
+                <i id="sentiment-icon" class="fa-solid fa-face-smile"></i>
+                <span id="sentiment-label">Positive</span>
+              </div>
+              <span class="result-label-caption">Predicted Sentiment</span>
+            </div>
+          </div>
+          <div class="result-text-preview">
+            <i class="fa-solid fa-quote-left"></i>
+            <p id="text-preview"></p>
+          </div>
+          <div id="confidence-container" class="confidence-section">
+            <div class="conf-header">
+              <span class="conf-label"><i class="fa-solid fa-gauge-high"></i> Model Confidence</span>
+              <span class="conf-value" id="confidence-value">0%</span>
+            </div>
+            <div class="conf-track">
+              <div class="conf-fill" id="confidence-bar" style="width:0%"></div>
+            </div>
+          </div>
+          <button class="reset-btn" id="reset-btn">
+            <i class="fa-solid fa-rotate-left"></i> Analyze Another
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════ ABOUT SECTION ═══════ -->
+    <section class="about-section" id="about">
+      <div class="section-container">
+        <div class="section-tag">Project</div>
+        <h2 class="section-title">About AuraSentiment</h2>
+        <p class="section-sub">A complete end-to-end AI application built for the DEVFORGE internship program.</p>
+        <div class="about-grid">
+          <div class="about-card reveal">
+            <div class="about-icon"><i class="fa-solid fa-robot"></i></div>
+            <div class="about-info">
+              <span class="about-key">ML Model</span>
+              <span class="about-val">Logistic Regression</span>
+            </div>
+          </div>
+          <div class="about-card reveal">
+            <div class="about-icon"><i class="fa-solid fa-vector-square"></i></div>
+            <div class="about-info">
+              <span class="about-key">Feature Extraction</span>
+              <span class="about-val">TF-IDF (5000 features)</span>
+            </div>
+          </div>
+          <div class="about-card reveal">
+            <div class="about-icon"><i class="fa-solid fa-server"></i></div>
+            <div class="about-info">
+              <span class="about-key">Backend</span>
+              <span class="about-val">FastAPI + Uvicorn</span>
+            </div>
+          </div>
+          <div class="about-card reveal">
+            <div class="about-icon"><i class="fa-solid fa-bullseye"></i></div>
+            <div class="about-info">
+              <span class="about-key">Validation Accuracy</span>
+              <span class="about-val">82.35% on unseen data</span>
+            </div>
+          </div>
+          <div class="about-card reveal">
+            <div class="about-icon"><i class="fa-solid fa-tags"></i></div>
+            <div class="about-info">
+              <span class="about-key">Sentiment Classes</span>
+              <span class="about-val">Positive · Neutral · Negative</span>
+            </div>
+          </div>
+          <div class="about-card reveal">
+            <div class="about-icon"><i class="fa-brands fa-python"></i></div>
+            <div class="about-info">
+              <span class="about-key">Language</span>
+              <span class="about-val">Python 3.11 + Vanilla JS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ DEVELOPER SECTION ═══════ -->
+    <section class="dev-section">
+      <div class="section-container dev-inner">
+        <div class="dev-card reveal">
+          <div class="dev-avatar">
+            <i class="fa-solid fa-user-astronaut"></i>
+          </div>
+          <div class="dev-info">
+            <span class="dev-tag">Developer</span>
+            <h3 class="dev-name">Abdul Sami</h3>
+            <p class="dev-role">AI/ML Intern · DEVFORGE</p>
+            <p class="dev-desc">Built this end-to-end sentiment analysis application from dataset exploration through model training to a fully deployed FastAPI microservice with a premium frontend.</p>
+            <div class="dev-tech-tags">
+              <span>Python</span>
+              <span>Scikit-learn</span>
+              <span>FastAPI</span>
+              <span>NLTK</span>
+              <span>Vanilla JS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <div class="footer-logo"><i class="fa-solid fa-brain"></i></div>
+          <span>AuraSentiment</span>
+        </div>
+        <p class="footer-tagline">Made with Machine Learning + FastAPI</p>
+        <p class="footer-copy">DEVFORGE AI/ML Internship &nbsp;·&nbsp; Developed by <strong>Abdul Sami</strong> &nbsp;·&nbsp; 2026</p>
+      </div>
+    </footer>
+
+  </div><!-- end #main-app -->
+
+  <script src="app.js"></script>
 </body>
 </html>
