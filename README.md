@@ -138,12 +138,24 @@ The frontend is built using clean, vanilla **HTML5**, **CSS3**, and **Vanilla Ja
 <img width="1918" height="968" alt="SPLASH_T1" src="https://github.com/user-attachments/assets/195746c2-77b7-4af1-9394-e6a35551655f" />
 
 
-### 2. Home Screen
+### 2. 🏠 Home Screen
 <img width="1898" height="972" alt="HOME" src="https://github.com/user-attachments/assets/03e9d5f5-b6d5-488f-8f85-767877abdfb5" />
 
 
-### 3. Error Handling Notification
-*(Place your screenshot showing connection error or validation message here)*
+### 3. 😊 Positive Prediction
+<img width="1901" height="1075" alt="POSITIVE" src="https://github.com/user-attachments/assets/c647a8e9-041f-4e5c-a680-5d70ce945777" />
+
+
+
+### 4. 😐 Neutral Prediction
+<img width="1897" height="1078" alt="NEUTRAL" src="https://github.com/user-attachments/assets/f473f83c-61d1-46f2-91a1-1ba3e90b336c" />
+
+
+
+### 5. 😞 Negative Prediction
+<img width="1900" height="1077" alt="NEGATIVE" src="https://github.com/user-attachments/assets/993c15c4-af21-4249-bc3d-218af5b73831" />
+
+
 
 ---
 
