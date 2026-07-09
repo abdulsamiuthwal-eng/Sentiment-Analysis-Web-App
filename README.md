@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # AuraSentiment — End-to-End Sentiment Analysis Web Application
 
 AuraSentiment is a premium, portfolio-grade Machine Learning based Sentiment Analysis application that classifies the sentiment of text (tweets, reviews, or general comments) into **Positive 😊**, **Neutral 😐**, or **Negative 😞** categories. 
@@ -143,5 +142,3 @@ The frontend is built using clean, vanilla **HTML5**, **CSS3**, and **Vanilla Ja
 2. **Emoji Mapping:** Parse and tokenize emojis to preserve their sentiment scores instead of discarding them.
 3. **Database Integration:** Save history of user query predictions for analytics and active learning feedback loops.
 =======
-# Sentiment-Analysis-Web-App
->>>>>>> 66587b7e096f484283c5e50b1c5b7a8970925156
